@@ -1,4 +1,4 @@
-// 通用遍历树的迭代解法
+// DFS 通用遍历树的迭代解法
 function treeTraversal(node) {
   const UN_VISITED = 0; // 未访问
   const VISITED = 1; // 已访问
@@ -19,16 +19,41 @@ function treeTraversal(node) {
   return res;
 }
 
-// 通用遍历树的递归解法
-function treeTraversalRecurse(node,res) {
+// DFS 通用遍历树的递归解法
+function treeTraversalRecurse(node, res) {
   if (!node) return;
-  treeTraversalRecurse(node.left,res);
-  res.push(node.val)
-  treeTraversalRecurse(node.right,res);
+  treeTraversalRecurse(node.left, res);
+  res.push(node.val);
+  treeTraversalRecurse(node.right, res);
 }
-const result = []
-treeTraversalRecurse(root,result)
+const result = [];
+treeTraversalRecurse(root, result);
 
+// BFS
+function treeLevelOrder(root) {
+  if (!root) {
+    return [];
+  }
+  const res = [];
+  const queue = [root, null]; // 此处用 null 来标记层的结束
+  let levelNodes = [];
+  while (queue.length) {
+    const node = queue.shift();
+    if (node) {
+      levelNodes.push(node.val);
+      if (node.left) queue.push(node.left);
+      if (node.right) queue.push(node.right);
+    } else {
+      // 代表单层已经遍历完
+      res.push(levelNodes);
+      levelNodes = [];
+      if (queue.length) {
+        queue.push(null);
+      }
+    }
+  }
+  return res
+}
 
 //【先序遍历】递归
 function preOrderTraversalRecurse(root) {
@@ -141,3 +166,22 @@ const mockTree = {
 };
 
 postOrderTraversal(mockTree);
+
+function traversal(root) {
+  const res = [];
+  const stack = [[0, root]];
+  while (stack.length) {
+    const [flag, node] = stack.pop();
+    if (!node) {
+      continue;
+    }
+    if (flag) {
+      res.push(node.val);
+    } else {
+      stack.push([0, node.right]);
+      stack.push([0, node.left]);
+      stack.push([1, node]);
+    }
+  }
+  return res;
+}
