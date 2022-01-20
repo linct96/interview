@@ -1,3 +1,35 @@
+// 通用遍历树的迭代解法
+function treeTraversal(node) {
+  const UN_VISITED = 0; // 未访问
+  const VISITED = 1; // 已访问
+  const res = [];
+  const stack = [[UN_VISITED, node]]; // 定义初始访问栈
+  while (stack.length) {
+    const [flag, node] = stack.pop();
+    if (!node) continue; // 跳过无子节点的叶节点的两个 null 节点
+    if (flag === UN_VISITED) {
+      // 先、中、后序遍历仅需要控制入栈的顺序即可
+      stack.push([UN_VISITED, node.right]);
+      stack.push([VISITED, node]);
+      stack.push([UN_VISITED, node.left]);
+    } else {
+      res.push(node.val);
+    }
+  }
+  return res;
+}
+
+// 通用遍历树的递归解法
+function treeTraversalRecurse(node,res) {
+  if (!node) return;
+  treeTraversalRecurse(node.left,res);
+  res.push(node.val)
+  treeTraversalRecurse(node.right,res);
+}
+const result = []
+treeTraversalRecurse(root,result)
+
+
 //【先序遍历】递归
 function preOrderTraversalRecurse(root) {
   if (!root) return;
@@ -8,11 +40,11 @@ function preOrderTraversalRecurse(root) {
 //【先序遍历】迭代
 function preOrderTraversal(root) {
   const stack = [];
-  const res = []
+  const res = [];
   stack.push(root);
   while (stack.length) {
     const cur = stack.pop();
-    res.push(cur.value)
+    res.push(cur.value);
     if (cur.right) {
       stack.push(cur.right);
     }
@@ -20,7 +52,7 @@ function preOrderTraversal(root) {
       stack.push(cur.left);
     }
   }
-  return res
+  return res;
 }
 
 //【中序遍历】递归
@@ -56,13 +88,13 @@ function postOrderTraversalRecurse(root) {
   }
 }
 
-function postOrderTraversal(root){
+function postOrderTraversal(root) {
   const stack = [];
-  const res = []
+  const res = [];
   stack.push(root);
   while (stack.length) {
     const cur = stack.pop();
-    res.push(cur.value)
+    res.push(cur.value);
     if (cur.right) {
       stack.push(cur.right);
     }
@@ -70,7 +102,7 @@ function postOrderTraversal(root){
       stack.push(cur.left);
     }
   }
-  return res
+  return res;
 }
 
 //        1
