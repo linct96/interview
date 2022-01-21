@@ -31,28 +31,22 @@ treeTraversalRecurse(root, result);
 
 // BFS
 function treeLevelOrder(root) {
-  if (!root) {
-    return [];
-  }
-  const res = [];
-  const queue = [root, null]; // 此处用 null 来标记层的结束
+  const result = [];
+  if (!root) return result;
+  const queue = [root];
   let levelNodes = [];
   while (queue.length) {
-    const node = queue.shift();
-    if (node) {
+    const size = queue.length; // 需要定义一个常量记住现有的队列长度。因为 node 的子节点会有入队操作使得 queue 的长度改变
+    for (let i = 0; i < size; i++) {
+      const node = queue.shift();
+      node.left && queue.push(node.left);
+      node.right && queue.push(node.right);
       levelNodes.push(node.val);
-      if (node.left) queue.push(node.left);
-      if (node.right) queue.push(node.right);
-    } else {
-      // 代表单层已经遍历完
-      res.push(levelNodes);
-      levelNodes = [];
-      if (queue.length) {
-        queue.push(null);
-      }
     }
+    result.push(levelNodes);
+    levelNodes = [];
   }
-  return res
+  return result;
 }
 
 //【先序遍历】递归
