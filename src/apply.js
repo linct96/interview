@@ -7,7 +7,7 @@ function myApply(context, arr) {
     for (let i = 0; i < arr.length; i++) {
       args.push('arr[' + i + ']')
     }
-    result = eval('context._fn(' + args.toString() + ')')
+    result = eval('context._fn(' + args + ')')
   } else {
     result = ctx._fn()
   }
