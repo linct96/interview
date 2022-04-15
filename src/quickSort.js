@@ -1,16 +1,23 @@
 // 快速排序
-const quickSort = (arr) => {
-  if(arr.length<=1) return arr
-  let centerIndex = Math.floor(arr.length/2)
-  let centerValue = arr.splice(centerIndex,1)[0]
-  const leftArr = []
-  const rightArr = []
+function quickSort(arr) {
+  if (arr.length <= 1) return arr
+  const left = []
+  const right = []
+  const centerIndex = Math.floor(arr.length / 2)
+  const centerValue = arr.splice(centerIndex, 1)[0]
   for (let index = 0; index < arr.length; index++) {
-    if (arr[index]>centerValue) {
-      rightArr.push(arr[index])
-    }else{
-      leftArr.push(arr[index])
+    if (arr[index] > centerValue) {
+      right.push(arr[index])
+    } else {
+      left.push(arr[index])
     }
   }
-  return [...quickSort(leftArr),centerValue,...quickSort(rightArr)]
+  return [...quickSort(left), centerValue, ...quickSort(right)]
 }
+
+function main() {
+  const arr = [1, 7, 8, 2, 6, 8, 0]
+  console.log(quickSort(arr))
+}
+
+main()
