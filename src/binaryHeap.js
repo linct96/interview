@@ -13,7 +13,7 @@ class MaxHeap {
     this.heap[j] = temp
   }
 
-  insert(value) {
+  insert = value => {
     this.heap.push(value)
     this.bubbleUp(this.heap.length - 1)
   }
@@ -27,7 +27,7 @@ class MaxHeap {
     return max
   }
 
-  bubbleUp(index) {
+  bubbleUp = index => {
     const parentIndex = Math.floor((index - 1) / 2)
     if (parentIndex < 0) return
     if (this.heap[parentIndex] < this.heap[index]) {
@@ -36,7 +36,7 @@ class MaxHeap {
     }
   }
 
-  bubbleDown(index) {
+  bubbleDown = index => {
     const value = this.heap[index]
     const leftIndex = 2 * index + 1
     const rightIndex = 2 * index + 2
@@ -63,7 +63,9 @@ class MaxHeap {
     }
   }
 
-  value = () => this.heap
+  get value() {
+    return this.heap
+  }
 }
 
 const heap = new MaxHeap([1, 7, 8, 2, 6, 8, 0])

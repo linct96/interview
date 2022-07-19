@@ -15,9 +15,6 @@ function quickSort(arr) {
   return [...quickSort(left), centerValue, ...quickSort(right)]
 }
 
-function main() {
-  const arr = [1, 7, 8, 2, 6, 8, 0]
-  console.log(quickSort(arr))
-}
-
-main()
+const arr = [1, 7, 8, 2, 6, 8, 0]
+const result = quickSort(arr)
+console.log(result)
